@@ -79,7 +79,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 def machine_learning_modeling():
     # Header
     st.title("NPRI ML Model")
@@ -173,7 +172,7 @@ def machine_learning_modeling():
                               template='plotly_white',
                               font=dict(family="Arial, sans-serif", size=12, color="black"),
                               margin=dict(l=50, r=50, t=50, b=50),
-                              xaxis=dict(tickmode='linear', tick0=2019, dtick=1),  # Set tick mode to linear and start from 2019 with step 1
+                              xaxis=dict(tickmode='array', tickvals=list(range(2019, 2028)), ticktext=list(range(2019, 2028))),  # Set tick mode to array and specify tick values and text
                               xaxis_range=[2019, 2027])  # Set the x-axis range from 2019 to 2027
 
             # Add annotations for quantity values
@@ -184,6 +183,20 @@ def machine_learning_modeling():
                                    yshift=10)
 
             st.plotly_chart(fig)
+
+            # Bar chart for predicted quantities from 2019 to 2027
+            fig_bar = go.Figure(data=[
+                go.Bar(name='Predicted Quantity', x=list(range(2019, 2028)), y=predicted_quantities, marker_color='lightgreen')
+            ])
+            # Change the layout
+            fig_bar.update_layout(title=f'Predicted {selected_substance_name} Quantity from 2019 to 2027',
+                                  xaxis_title='Year',
+                                  yaxis_title='Quantity (tonnes)',
+                                  template='plotly_white',
+                                  font=dict(family="Arial, sans-serif", size=12, color="black"),
+                                  margin=dict(l=50, r=50, t=50, b=50),
+                                  xaxis=dict(tickmode='array', tickvals=list(range(2019, 2028)), ticktext=list(range(2019, 2028))))  # Set tick mode to array and specify tick values and text
+            st.plotly_chart(fig_bar)
 
         else:
             st.write(f"No data available for {selected_substance_name} for {selected_company_name} for previous years.")
@@ -236,7 +249,7 @@ def machine_learning_modeling():
                               template='plotly_white',
                               font=dict(family="Arial, sans-serif", size=12, color="black"),
                               margin=dict(l=50, r=50, t=50, b=50),
-                              xaxis=dict(tickmode='linear', tick0=2019, dtick=1),  # Set tick mode to linear and start from 2019 with step 1
+                              xaxis=dict(tickmode='array', tickvals=list(range(2019, 2028)), ticktext=list(range(2019, 2028))),  # Set tick mode to array and specify tick values and text
                               xaxis_range=[2019, 2027])  # Set the x-axis range from 2019 to 2027
 
             # Add annotations for quantity values
@@ -248,12 +261,27 @@ def machine_learning_modeling():
 
             st.plotly_chart(fig)
 
+            # Bar chart for predicted quantities from 2019 to 2027
+            fig_bar = go.Figure(data=[
+                go.Bar(name='Predicted Quantity', x=list(range(2019, 2028)), y=predicted_quantities, marker_color='lightgreen')
+            ])
+            # Change the layout
+            fig_bar.update_layout(title=f'Predicted {selected_substance_name} Quantity for {selected_company_name} from 2019 to 2027',
+                                  xaxis_title='Year',
+                                  yaxis_title='Quantity (tonnes)',
+                                  template='plotly_white',
+                                  font=dict(family="Arial, sans-serif", size=12, color="black"),
+                                  margin=dict(l=50, r=50, t=50, b=50),
+                                  xaxis=dict(tickmode='array', tickvals=list(range(2019, 2028)), ticktext=list(range(2019, 2028))))  # Set tick mode to array and specify tick values and text
+            st.plotly_chart(fig_bar)
+
         else:
             st.write(f"No data available for {selected_substance_name} for {selected_company_name} for previous years.")
 
+
 def Chatbot():
     # Chat Box
-  st.subheader("🌟Welcome to our chatbot Assistant for NPRI Project🌟")  
+  st.subheader("🌟Welcome to our chatbot Assistant for NPRI Project🌟")
   st.subheader("Have questions? Ask our Assistant!")
   chatbot_url = "https://hf.co/chat/assistant/661b432f5693cfc26defd2c3"
   st.markdown(f'<iframe src="{chatbot_url}" width="500" height="500"></iframe>', unsafe_allow_html=True)
